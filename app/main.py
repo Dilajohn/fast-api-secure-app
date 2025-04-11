@@ -43,11 +43,7 @@ def refresh_token(refresh_token: str):
     return {"access_token": access, "refresh_token": refresh_token, "token_type": "bearer"}
 
 
-@app.middleware("http")
-async def set_secure_headers(request, call_next):
-    response = await call_next(request)
-    secure_headers.starlette(response)
-    return response
+
 
 # Optional: Add CORS Middleware for frontend/backend interaction
 @app.add_middleware(
