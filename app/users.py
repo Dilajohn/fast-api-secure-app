@@ -29,9 +29,9 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401, detail="Invalid token")
     return payload
 
-def require_role(required_role: str):
+def require_role(role: str):
     def wrapper(user=Depends(get_current_user)):
-        if user["role"] != required_role:
+        if user["role"] != role:
             raise HTTPException(status_code=403, detail="Insufficient permissions")
         return user
     return wrapper
